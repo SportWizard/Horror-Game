@@ -1,6 +1,6 @@
 class_name AbstractEnemy extends CharacterBody2D
 
-@export var speed: int = 200
+@export var speed: int = 50
 
 func wander() -> void:
 	pass
