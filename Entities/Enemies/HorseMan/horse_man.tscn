@@ -1,0 +1,90 @@
+[gd_scene load_steps=12 format=3 uid="uid://balsomu0kfmsk"]
+
+[ext_resource type="Script" uid="uid://56mibatm1gaq" path="res://Entities/Enemies/HorseMan/horse_man.gd" id="1_jcqnk"]
+[ext_resource type="Texture2D" uid="uid://dwvus4ai73acm" path="res://Entities/Enemies/HorseMan/horse-man.png" id="1_tnjmc"]
+
+[sub_resource type="Animation" id="Animation_g4pat"]
+resource_name = "Idle left"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.50245),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_tnjmc"]
+resource_name = "Idle right"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.507853),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v47qx"]
+_data = {
+&"Idle left": SubResource("Animation_g4pat"),
+&"Idle right": SubResource("Animation_tnjmc")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tnjmc"]
+animation = &"Idle left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jcqnk"]
+animation = &"Idle right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_g4pat"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_tnjmc")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_jcqnk")
+blend_point_1/pos = Vector2(1, 0)
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v47qx"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_e6u2q"]
+states/Idle/node = SubResource("AnimationNodeBlendSpace2D_g4pat")
+states/Idle/position = Vector2(383, 98)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_v47qx")]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g4pat"]
+radius = 3.0
+height = 12.0
+
+[node name="Horse man" type="CharacterBody2D"]
+script = ExtResource("1_jcqnk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_tnjmc")
+hframes = 4
+frame = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_v47qx")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_e6u2q")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Idle/blend_position = 0.473136
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 13)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_g4pat")
