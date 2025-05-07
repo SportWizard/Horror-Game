@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://sy3xy63h64ih"]
+
+[ext_resource type="PackedScene" uid="uid://bup6nvtio7tiv" path="res://Entities/Player/player.tscn" id="1_80nbo"]
+[ext_resource type="Texture2D" uid="uid://oq41xacw483o" path="res://icon.svg" id="2_e2o6t"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Darkness" type="CanvasModulate" parent="."]
+color = Color(0.00351917, 0.00351917, 0.00351916, 1)
+
+[node name="Temporary background" type="Sprite2D" parent="."]
+position = Vector2(578, 324.5)
+scale = Vector2(9.03125, 5.07031)
+texture = ExtResource("2_e2o6t")
+
+[node name="Player" parent="." instance=ExtResource("1_80nbo")]
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(10, 10)
