@@ -3,7 +3,7 @@ extends Enemy
 func _on_timer_timeout() -> void:
 	self.wander()
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
+func _on_structure_detection_body_entered(body: Node2D) -> void:
 	self.wander()
 	
 	# Reset timer
