@@ -20,4 +20,4 @@ texture = ExtResource("2_e2o6t")
 zoom = Vector2(10, 10)
 
 [node name="Horse man" parent="." instance=ExtResource("3_feb5d")]
-position = Vector2(241, 124)
+position = Vector2(67, 40)
