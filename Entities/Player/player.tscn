@@ -85,7 +85,7 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_7a1se")
 anim_player = NodePath("../AnimationPlayer")
-parameters/Idle/blend_position = 0.019294
+parameters/Idle/blend_position = Vector2(1, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
