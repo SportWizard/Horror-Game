@@ -71,7 +71,8 @@ radius = 16.0
 height = 82.0
 
 [node name="HorseMan" type="CharacterBody2D"]
-collision_mask = 3
+collision_layer = 2
+collision_mask = 7
 script = ExtResource("1_jcqnk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -97,7 +98,7 @@ shape = SubResource("CapsuleShape2D_g4pat")
 
 [node name="StructureDetection" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StructureDetection"]
 position = Vector2(0, 13)

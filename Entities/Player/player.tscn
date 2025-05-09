@@ -69,13 +69,12 @@ height = 8.0
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
-collision_mask = 3
+collision_mask = 7
 script = ExtResource("1_3uyv8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_lu8i8")
 hframes = 4
-frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
