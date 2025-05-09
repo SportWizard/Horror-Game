@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://balsomu0kfmsk"]
+[gd_scene load_steps=14 format=3 uid="uid://balsomu0kfmsk"]
 
 [ext_resource type="Script" uid="uid://56mibatm1gaq" path="res://Entities/Enemies/HorseMan/horse_man.gd" id="1_jcqnk"]
 [ext_resource type="Texture2D" uid="uid://dwvus4ai73acm" path="res://Entities/Enemies/HorseMan/horse-man.png" id="1_tnjmc"]
@@ -66,14 +66,17 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 radius = 3.0
 height = 12.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tnjmc"]
-radius = 16.0
-height = 82.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_tnjmc"]
+radius = 33.0151
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jcqnk"]
+radius = 104.005
 
 [node name="HorseMan" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 7
 script = ExtResource("1_jcqnk")
+speed = 40.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_tnjmc")
@@ -96,6 +99,8 @@ shape = SubResource("CapsuleShape2D_g4pat")
 
 [node name="WanderTimer" type="Timer" parent="."]
 
+[node name="ReactionTimer" type="Timer" parent="."]
+
 [node name="StructureDetection" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 4
@@ -109,10 +114,15 @@ shape = SubResource("CapsuleShape2D_g4pat")
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
-position = Vector2(33, 0)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_tnjmc")
+shape = SubResource("CircleShape2D_tnjmc")
+
+[node name="ChaseZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseZone"]
+shape = SubResource("CircleShape2D_jcqnk")
 
 [connection signal="timeout" from="WanderTimer" to="." method="_on_wander_timer_timeout"]
+[connection signal="timeout" from="ReactionTimer" to="." method="_on_reaction_timer_timeout"]
 [connection signal="body_entered" from="StructureDetection" to="." method="_on_structure_detection_body_entered"]
 [connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detection_body_entered"]
+[connection signal="body_exited" from="ChaseZone" to="." method="_on_chase_zone_body_exited"]
