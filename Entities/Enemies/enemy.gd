@@ -33,22 +33,16 @@ func _on_structure_detection_body_entered(body: Node2D) -> void:
 func _on_player_detection_body_entered(body: Node2D) -> void:
 	print(body.position)
 
+func _check_nodes_and_connections(node: Node, node_name: String, node_type: String, connection_name: String, function_name: String):
+	if not node:
+		assert(false, "Change node \"%s\" to \"%s\" for \"%s\"" % [node_type, node_name, self.name])
+	if not node.is_connected(connection_name, Callable(self, function_name)):
+		assert(false, "Missing connection between \"%s\"'s \"%s\" and \"%s\" for \"%s\"" % [node_name, connection_name, function_name, self.name])
+
 func _ready() -> void:
-	# Check if nodes exists and connection with signals
-	if not $WanderTimer:
-		assert(false, "Change \"Timer\" to \"WanderTimer\"")
-	if not $WanderTimer.is_connected("timeout", Callable(self, "_on_wander_timer_timeout")):
-		assert(false, "Missing connection between WanderTimer and _on_wander_timer_timeout()")
-	
-	if not $StructureDetection:
-		assert(false, "Change \"Area2D\" to \"StructureDetection\"")
-	if not $StructureDetection.is_connected("body_entered", Callable(self, "_on_structure_detection_body_entered")):
-		assert(false, "Missing connection between StructureDetection and _on_structure_detection_body_entered()")
-	
-	if not $PlayerDetection:
-		assert(false, "Change \"Area2D\" to \"PlayerDetection\"")
-	if not $PlayerDetection.is_connected("body_entered", Callable(self, "_on_player_detection_body_entered")):
-		assert(false, "Missing connection between PlayerDetection and _on_player_detection_body_entered()")
+	self._check_nodes_and_connections($WanderTimer, "WanderTimer", "Timer", "timeout", "_on_wander_timer_timeout")
+	self._check_nodes_and_connections($StructureDetection, "StructureDetection", "Area2D", "body_entered", "_on_structure_detection_body_entered")
+	self._check_nodes_and_connections($PlayerDetection, "PlayerDetection", "Area2D", "body_entered", "_on_player_detection_body_entered")
 
 func _physics_process(delta: float) -> void:
 	# Start the timer for wander
