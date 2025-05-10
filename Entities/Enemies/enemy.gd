@@ -15,7 +15,12 @@ func _animation() -> void:
 	if self.velocity.x != 0:
 		self._cur_dir.x = sign(self.velocity.x)
 	
-	$AnimationTree.set("parameters/Idle/blend_position", self._cur_dir)
+	if self.velocity == Vector2.ZERO:
+		self._state_machine.travel("Idle")
+		$AnimationTree.set("parameters/Idle/blend_position", self._cur_dir)
+	else:
+		self._state_machine.travel("Walk")
+		$AnimationTree.set("parameters/Walk/blend_position", self._cur_dir)
 
 func _wander() -> void:
 	var dir: Vector2 = self._dirs[randi() % self._dirs.size()]

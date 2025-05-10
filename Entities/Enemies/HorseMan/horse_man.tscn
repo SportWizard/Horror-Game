@@ -101,6 +101,7 @@ blend_point_0/node = SubResource("AnimationNodeAnimation_g4pat")
 blend_point_0/pos = Vector2(-1, 0)
 blend_point_1/node = SubResource("AnimationNodeAnimation_v47qx")
 blend_point_1/pos = Vector2(1, 0)
+blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v47qx"]
 advance_mode = 2
@@ -136,6 +137,7 @@ speed = 40.0
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_tnjmc")
 hframes = 16
+frame = 10
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
