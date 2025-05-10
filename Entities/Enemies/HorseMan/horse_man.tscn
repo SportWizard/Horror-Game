@@ -1,7 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://balsomu0kfmsk"]
+[gd_scene load_steps=21 format=3 uid="uid://balsomu0kfmsk"]
 
 [ext_resource type="Script" uid="uid://56mibatm1gaq" path="res://Entities/Enemies/HorseMan/horse_man.gd" id="1_jcqnk"]
-[ext_resource type="Texture2D" uid="uid://dwvus4ai73acm" path="res://Entities/Enemies/HorseMan/horse-man.png" id="1_tnjmc"]
+[ext_resource type="Texture2D" uid="uid://b5ifrks4hfvjd" path="res://Entities/Enemies/HorseMan/horse-man-with-hammer.png" id="2_tnjmc"]
 
 [sub_resource type="Animation" id="Animation_g4pat"]
 resource_name = "Idle left"
@@ -35,10 +35,46 @@ tracks/0/keys = {
 "values": [0, 1]
 }
 
+[sub_resource type="Animation" id="Animation_e6u2q"]
+resource_name = "Walk left"
+length = 1.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [10, 11, 12, 13, 14, 15]
+}
+
+[sub_resource type="Animation" id="Animation_jcqnk"]
+resource_name = "Walk right"
+length = 1.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7, 8, 9]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v47qx"]
 _data = {
 &"Idle left": SubResource("Animation_g4pat"),
-&"Idle right": SubResource("Animation_tnjmc")
+&"Idle right": SubResource("Animation_tnjmc"),
+&"Walk left": SubResource("Animation_e6u2q"),
+&"Walk right": SubResource("Animation_jcqnk")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tnjmc"]
@@ -54,13 +90,32 @@ blend_point_1/node = SubResource("AnimationNodeAnimation_jcqnk")
 blend_point_1/pos = Vector2(1, 0)
 blend_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g4pat"]
+animation = &"Walk left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v47qx"]
+animation = &"Walk right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_e6u2q"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_g4pat")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_v47qx")
+blend_point_1/pos = Vector2(1, 0)
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v47qx"]
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g3b3n"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nhxxn"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_e6u2q"]
+states/End/position = Vector2(858, 97.875)
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_g4pat")
-states/Idle/position = Vector2(383, 98)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_v47qx")]
+states/Idle/position = Vector2(387, 46.5)
+states/Walk/node = SubResource("AnimationNodeBlendSpace2D_e6u2q")
+states/Walk/position = Vector2(387, 164)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_v47qx"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_g3b3n"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_nhxxn")]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g4pat"]
 radius = 3.0
@@ -79,8 +134,8 @@ script = ExtResource("1_jcqnk")
 speed = 40.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_tnjmc")
-hframes = 4
+texture = ExtResource("2_tnjmc")
+hframes = 16
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -91,6 +146,7 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_e6u2q")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Idle/blend_position = Vector2(1, 0)
+parameters/Walk/blend_position = Vector2(0, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 13)

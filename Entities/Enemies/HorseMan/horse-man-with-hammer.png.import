@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwvus4ai73acm"
-path="res://.godot/imported/horse-man.png-0843a1e7328b3214fba3f50a21f7ebd8.ctex"
+uid="uid://b5ifrks4hfvjd"
+path="res://.godot/imported/horse-man-with-hammer.png-4097cadd0ed7387dbda7742e30fd2387.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entities/Enemies/HorseMan/horse-man.png"
-dest_files=["res://.godot/imported/horse-man.png-0843a1e7328b3214fba3f50a21f7ebd8.ctex"]
+source_file="res://Entities/Enemies/HorseMan/horse-man-with-hammer.png"
+dest_files=["res://.godot/imported/horse-man-with-hammer.png-4097cadd0ed7387dbda7742e30fd2387.ctex"]
 
 [params]
 

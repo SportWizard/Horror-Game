@@ -1,5 +1,7 @@
 class_name Enemy extends CharacterBody2D
 
+@onready var _state_machine: AnimationNodeStateMachinePlayback = $AnimationTree["parameters/playback"]
+
 @export var speed: float = 50
 @export_range(1, 4) var speed_multiplier: float = 2
 @export var wander_time: float = 3.0
@@ -10,7 +12,9 @@ var _dirs: Array[Vector2] = [Vector2.ZERO, Vector2(-1, 0), Vector2(1, 0), Vector
 var _chasing: Node2D = null
 
 func _animation() -> void:
-	self._cur_dir.x = self._cur_dir.x if Helper.same_axis_dir(self._cur_dir.x, velocity.x) else -self._cur_dir.x
+	if self.velocity.x != 0:
+		self._cur_dir.x = sign(self.velocity.x)
+	
 	$AnimationTree.set("parameters/Idle/blend_position", self._cur_dir)
 
 func _wander() -> void:
@@ -65,5 +69,5 @@ func _physics_process(delta: float) -> void:
 	elif $WanderTimer.is_stopped():
 		$WanderTimer.start(self.wander_time)
 	
-	self.move_and_slide()
 	self._animation()
+	self.move_and_slide()

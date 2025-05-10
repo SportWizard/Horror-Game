@@ -14,10 +14,12 @@ func _movement() -> void:
 		self.velocity *= self.speed_multiplier
 
 func _animation() -> void:
-	self._cur_dir.x = self._cur_dir.x if Helper.same_axis_dir(self._cur_dir.x, velocity.x) else -self._cur_dir.x
+	if self.velocity.x != 0:
+		self._cur_dir.x = sign(self.velocity.x)
+	
 	$AnimationTree.set("parameters/Idle/blend_position", self._cur_dir)
 
 func _physics_process(delta: float) -> void:
 	self._movement()
-	self.move_and_slide()
 	self._animation()
+	self.move_and_slide()
