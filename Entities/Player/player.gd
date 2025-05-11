@@ -8,7 +8,7 @@ extends CharacterBody2D
 
 @onready var _animation_tree: AnimationTree = $AnimationTree
 @onready var _stamina_timer: Timer = $StaminaTimer
-@onready var _progress_bar: ProgressBar = $Camera2D/ProgressBar
+@onready var _progress_bar: ProgressBar = $UI/ProgressBar
 
 var _cur_dir: Vector2 = Vector2(1, 0) # -1 is left and 1 is right, y is 0
 var _cur_stamina = self.max_stamina

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bup6nvtio7tiv"]
+[gd_scene load_steps=15 format=3 uid="uid://bup6nvtio7tiv"]
 
 [ext_resource type="Script" uid="uid://ba1nsymviqepx" path="res://Entities/Player/player.gd" id="1_3uyv8"]
 [ext_resource type="Texture2D" uid="uid://c6dgwumplp78b" path="res://Entities/Player/player.png" id="2_lu8i8"]
@@ -63,6 +63,12 @@ states/Idle/node = SubResource("AnimationNodeBlendSpace2D_5c2io")
 states/Idle/position = Vector2(372, 97.75)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_4wf4l")]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lu8i8"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tekja"]
+bg_color = Color(0, 0.552207, 0, 1)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tekja"]
 radius = 2.0
 height = 8.0
@@ -74,7 +80,6 @@ script = ExtResource("1_3uyv8")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_lu8i8")
 hframes = 4
-frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -86,13 +91,28 @@ tree_root = SubResource("AnimationNodeStateMachine_7a1se")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Idle/blend_position = Vector2(1, 0)
 
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(10, 10)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="ProgressBar" type="ProgressBar" parent="UI"]
+offset_left = 17.0
+offset_top = 1006.0
+offset_right = 539.0
+offset_bottom = 1059.0
+theme_override_styles/background = SubResource("StyleBoxFlat_lu8i8")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tekja")
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_tekja")
 
 [node name="Light" parent="." instance=ExtResource("3_lu8i8")]
-scale = Vector2(0.2, 0.2)
+scale = Vector2(0.15, 0.15)
 
 [node name="StaminaTimer" type="Timer" parent="."]
 
