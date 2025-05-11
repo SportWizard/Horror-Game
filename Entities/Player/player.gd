@@ -7,6 +7,7 @@ extends CharacterBody2D
 @export var stamina_gain: float = 1.0
 
 @onready var _animation_tree: AnimationTree = $AnimationTree
+@onready var _state_machine: AnimationNodeStateMachinePlayback = self._animation_tree["parameters/playback"]
 @onready var _stamina_timer: Timer = $StaminaTimer
 @onready var _progress_bar: ProgressBar = $UI/ProgressBar
 
@@ -19,7 +20,7 @@ func _movement() -> void:
 	self.velocity = dir * self.speed
 	
 	if self._cur_stamina > 0 and self.velocity != Vector2.ZERO and Input.is_action_pressed("Sprint"):
-		self.velocity *= self.speed_multiplier
+		self.velocity = dir * self.speed * self.speed_multiplier
 		
 		if self._gain_stamina:
 			self._gain_stamina = false
@@ -35,7 +36,15 @@ func _animation() -> void:
 	if self.velocity.x != 0:
 		self._cur_dir.x = sign(self.velocity.x)
 	
-	self._animation_tree.set("parameters/Idle/blend_position", self._cur_dir)
+	if self.velocity == Vector2.ZERO:
+		self._state_machine.travel("Idle")
+		self._animation_tree.set("parameters/Idle/blend_position", self._cur_dir)
+	elif abs(self.velocity.x) <= self.speed and abs(self.velocity.y) <= self.speed:
+		self._state_machine.travel("Move")
+		self._animation_tree.set("parameters/Move/blend_position", self._cur_dir)
+	else:
+		self._state_machine.travel("Run")
+		self._animation_tree.set("parameters/Run/blend_position", self._cur_dir)
 
 func _on_stamina_timer_timeout() -> void:
 	self._gain_stamina = true
