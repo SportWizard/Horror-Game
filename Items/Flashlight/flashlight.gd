@@ -1,8 +1,8 @@
 extends Item
 
-@onready var _sprite = $Sprite2D
-@onready var _collisionShape = $CollisionShape2D
-@onready var _pointlight = $PointLight2D
+@onready var _sprite: Sprite2D = $Sprite2D
+@onready var _collisionShape: CollisionShape2D = $CollisionShape2D
+@onready var _pointlight: PointLight2D = $PointLight2D
 
 var _cur_dir: Vector2 = Vector2(1, 0) # -1 is left and 1 is right, y is 0
 

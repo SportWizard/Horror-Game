@@ -75,6 +75,14 @@ func _pickup_item() -> void:
 	
 	self._item_slots[self._selected_item_slot-1] = item
 
+func _drop_item() -> void:
+	var item: Item = self._item_slots[self._selected_item_slot-1]
+	self.remove_child(item)
+	self.get_parent().add_child(item)
+	item.global_position = self.global_position + item.item_offset # Reset position
+	
+	self._item_slots[self._selected_item_slot-1] = null
+
 func _user_input() -> void:
 	var dir: Vector2 = Input.get_vector("Left", "Right", "Up", "Down")
 	self._movement(dir)
@@ -82,6 +90,10 @@ func _user_input() -> void:
 	if Input.is_action_pressed("Interact"):
 		if self._detected_item:
 			self._pickup_item()
+	
+	if Input.is_action_just_pressed("Drop item"):
+		if self._item_slots[self._selected_item_slot-1]:
+			self._drop_item()
 	
 	if Input.is_action_just_pressed("Item slot1"):
 		self._selected_item_slot = 1

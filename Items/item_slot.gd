@@ -10,7 +10,10 @@ func _physics_process(delta: float) -> void:
 		
 		var item: Item = self._player._item_slots[self._player._selected_item_slot-1]
 		
+		# Put image of the item in the slot
 		if item:
 			self._texture_rect.texture = item.get_node("Sprite2D").texture
+		else:
+			self._texture_rect.texture = null
 	else:
 		self._sprite.frame = 0
