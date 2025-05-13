@@ -32,8 +32,7 @@ func _animation() -> void:
 		self._state_machine.travel("Run")
 		self._animation_tree.set("parameters/Run/blend_position", self._cur_dir)
 
-func _movement() -> void:
-	var dir: Vector2 = Input.get_vector("Left", "Right", "Up", "Down")
+func _movement(dir: Vector2) -> void:
 	self.velocity = dir * self.speed
 	
 	self._progress_bar.value = self._cur_stamina
@@ -66,14 +65,24 @@ func _on_item_detector_body_exited(body: Node2D) -> void:
 		if item == self._detected_item:
 			self._detected_item = null
 
+func _pickup_item() -> void:
+	var item: Item = self._detected_item
+	self._detected_item.get_parent().remove_child(item)
+	self.add_child(item)
+	item.global_position = self.global_position + item.item_offset # Reset position
+
+func _user_input() -> void:
+	var dir: Vector2 = Input.get_vector("Left", "Right", "Up", "Down")
+	self._movement(dir)
+	
+	if Input.is_action_pressed("Interact"):
+		if self._detected_item:
+			self._pickup_item()
+
 func _ready() -> void:
 	self._progress_bar.max_value = self.max_stamina
 
 func _physics_process(delta: float) -> void:
-	self._movement()
+	self._user_input()
 	self._animation()
 	self.move_and_slide()
-	if Input.is_action_pressed("ui_accept") and $Flashlight.visible == true:
-		$Flashlight.visible = false
-	elif Input.is_action_pressed("ui_accept") and $Flashlight.visible == false:
-		$Flashlight.visible = true
