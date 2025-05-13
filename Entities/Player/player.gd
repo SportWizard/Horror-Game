@@ -16,6 +16,8 @@ var _cur_dir: Vector2 = Vector2(1, 0) # -1 is left and 1 is right, y is 0
 var _cur_stamina = self.max_stamina
 var _gain_stamina = true
 
+var _detected_item: Item = null
+
 func _animation() -> void:
 	if self.velocity.x != 0:
 		self._cur_dir.x = sign(self.velocity.x)
@@ -51,6 +53,18 @@ func _movement() -> void:
 
 func _on_stamina_timer_timeout() -> void:
 	self._gain_stamina = true
+
+func _on_item_detector_body_entered(body: Node2D) -> void:
+	if is_instance_of(body, Item):
+		var item: Item = body
+		self._detected_item = item
+
+func _on_item_detector_body_exited(body: Node2D) -> void:
+	if is_instance_of(body, Item):
+		var item: Item = body
+		
+		if item == self._detected_item:
+			self._detected_item = null
 
 func _ready() -> void:
 	self._progress_bar.max_value = self.max_stamina

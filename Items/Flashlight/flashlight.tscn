@@ -1,7 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://dqyt6et7w154f"]
+[gd_scene load_steps=4 format=3 uid="uid://dqyt6et7w154f"]
 
 [ext_resource type="Texture2D" uid="uid://dp06jgj42skpt" path="res://Items/Flashlight/flashlight.png" id="1_i7qh5"]
+[ext_resource type="Script" uid="uid://bj2d1w6lqk0k0" path="res://Items/Flashlight/flashlight.gd" id="2_4syc5"]
 
-[node name="Flashlight" type="Sprite2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4syc5"]
+radius = 2.0
+height = 8.0
+
+[node name="Flashlight" type="StaticBody2D"]
 scale = Vector2(0.5, 0.5)
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("2_4syc5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_i7qh5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_4syc5")

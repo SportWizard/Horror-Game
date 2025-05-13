@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://sy3xy63h64ih"]
+[gd_scene load_steps=5 format=3 uid="uid://sy3xy63h64ih"]
 
 [ext_resource type="PackedScene" uid="uid://bup6nvtio7tiv" path="res://Entities/Player/player.tscn" id="1_80nbo"]
 [ext_resource type="Texture2D" uid="uid://oq41xacw483o" path="res://icon.svg" id="2_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://balsomu0kfmsk" path="res://Entities/Enemies/HorseMan/horse_man.tscn" id="3_feb5d"]
+[ext_resource type="PackedScene" uid="uid://dqyt6et7w154f" path="res://Items/Flashlight/flashlight.tscn" id="4_fc0e3"]
 
 [node name="Game" type="Node2D"]
 
@@ -19,3 +20,9 @@ texture = ExtResource("2_e2o6t")
 
 [node name="Horse man" parent="." instance=ExtResource("3_feb5d")]
 position = Vector2(67, 40)
+
+[node name="Flashlight" parent="." instance=ExtResource("4_fc0e3")]
+position = Vector2(48, -20)
+
+[node name="Flashlight2" parent="." instance=ExtResource("4_fc0e3")]
+position = Vector2(35, -25)
