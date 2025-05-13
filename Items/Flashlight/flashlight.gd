@@ -8,7 +8,7 @@ var _cur_dir: Vector2 = Vector2(1, 0) # -1 is left and 1 is right, y is 0
 
 func _physics_process(delta: float) -> void:
 	if self.get_parent().name.substr(0, 6) == "Player":
-		var parent = self.get_parent()
+		var parent: CharacterBody2D = self.get_parent()
 		
 		self._collisionShape.disabled = true
 		

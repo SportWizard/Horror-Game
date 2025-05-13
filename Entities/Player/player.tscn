@@ -1,8 +1,9 @@
-[gd_scene load_steps=32 format=3 uid="uid://bup6nvtio7tiv"]
+[gd_scene load_steps=33 format=3 uid="uid://bup6nvtio7tiv"]
 
 [ext_resource type="Script" uid="uid://ba1nsymviqepx" path="res://Entities/Player/player.gd" id="1_3uyv8"]
 [ext_resource type="Texture2D" uid="uid://c6dgwumplp78b" path="res://Entities/Player/player.png" id="2_lu8i8"]
 [ext_resource type="PackedScene" uid="uid://5n1w7kcjeaww" path="res://Other/Light/light.tscn" id="3_lu8i8"]
+[ext_resource type="PackedScene" uid="uid://bap4vuahr2kfd" path="res://Items/item_slot.tscn" id="4_tekja"]
 
 [sub_resource type="Animation" id="Animation_tekja"]
 resource_name = "Idle left"
@@ -198,7 +199,7 @@ script = ExtResource("1_3uyv8")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_lu8i8")
 hframes = 12
-frame = 2
+frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -221,7 +222,7 @@ shape = SubResource("CapsuleShape2D_tekja")
 zoom = Vector2(10, 10)
 
 [node name="Light" parent="." instance=ExtResource("3_lu8i8")]
-scale = Vector2(0.12, 0.12)
+scale = Vector2(0.14, 0.14)
 
 [node name="StaminaTimer" type="Timer" parent="."]
 
@@ -236,6 +237,20 @@ theme_override_styles/background = SubResource("StyleBoxFlat_lu8i8")
 theme_override_styles/fill = SubResource("StyleBoxFlat_tekja")
 show_percentage = false
 metadata/_edit_use_anchors_ = true
+
+[node name="ItemSlot1" parent="UI" instance=ExtResource("4_tekja")]
+offset_left = 1497.0
+offset_top = 904.0
+offset_right = 1513.0
+offset_bottom = 920.0
+scale = Vector2(10, 10)
+
+[node name="ItemSlot2" parent="UI" instance=ExtResource("4_tekja")]
+offset_left = 1715.0
+offset_top = 908.0
+offset_right = 1731.0
+offset_bottom = 924.0
+scale = Vector2(10, 10)
 
 [node name="ItemDetector" type="Area2D" parent="."]
 collision_layer = 0

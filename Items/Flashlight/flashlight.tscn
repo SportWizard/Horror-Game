@@ -23,6 +23,6 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_4syc5")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(89, 9.53674e-07)
-scale = Vector2(0.39, 0.16341)
+position = Vector2(60, 9.53674e-07)
+scale = Vector2(0.222, 0.16341)
 texture = ExtResource("3_ee1oo")

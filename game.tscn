@@ -16,11 +16,6 @@ scale = Vector2(9.03125, 5.07031)
 texture = ExtResource("2_e2o6t")
 
 [node name="Player" parent="." instance=ExtResource("1_80nbo")]
-speed = null
-speed_multiplier = null
-max_stamina = null
-stamina_time = null
-stamina_gain = null
 
 [node name="Horse man" parent="." instance=ExtResource("3_feb5d")]
 position = Vector2(67, 40)

@@ -17,6 +17,8 @@ var _cur_stamina = self.max_stamina
 var _gain_stamina = true
 
 var _detected_item: Item = null
+var _selected_item_slot: int = 1
+var _item_slots: Array[Item] = [null, null]
 
 func _animation() -> void:
 	if self.velocity.x != 0:
@@ -70,6 +72,8 @@ func _pickup_item() -> void:
 	self._detected_item.get_parent().remove_child(item)
 	self.add_child(item)
 	item.global_position = self.global_position + item.item_offset # Reset position
+	
+	self._item_slots[self._selected_item_slot-1] = item
 
 func _user_input() -> void:
 	var dir: Vector2 = Input.get_vector("Left", "Right", "Up", "Down")
@@ -78,6 +82,11 @@ func _user_input() -> void:
 	if Input.is_action_pressed("Interact"):
 		if self._detected_item:
 			self._pickup_item()
+	
+	if Input.is_action_just_pressed("Item slot1"):
+		self._selected_item_slot = 1
+	elif Input.is_action_just_pressed("Item slot2"):
+		self._selected_item_slot = 2
 
 func _ready() -> void:
 	self._progress_bar.max_value = self.max_stamina
