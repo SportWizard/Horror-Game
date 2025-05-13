@@ -1,1 +1,1 @@
-class_name Item extends Node2D
+class_name Item extends CharacterBody2D

@@ -73,3 +73,7 @@ func _physics_process(delta: float) -> void:
 	self._movement()
 	self._animation()
 	self.move_and_slide()
+	if Input.is_action_pressed("ui_accept") and $Flashlight.visible == true:
+		$Flashlight.visible = false
+	elif Input.is_action_pressed("ui_accept") and $Flashlight.visible == false:
+		$Flashlight.visible = true

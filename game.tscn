@@ -7,9 +7,8 @@
 
 [node name="Game" type="Node2D"]
 
-[node name="Darkness" type="CanvasModulate" parent="."]
-position = Vector2(-6.10352e-05, -3.05176e-05)
-color = Color(0.00351917, 0.00351917, 0.00351916, 1)
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+blend_mode = 1
 
 [node name="Temporary background" type="Sprite2D" parent="."]
 position = Vector2(578, 324.5)
@@ -18,11 +17,8 @@ texture = ExtResource("2_e2o6t")
 
 [node name="Player" parent="." instance=ExtResource("1_80nbo")]
 
+[node name="Flashlight" parent="Player" instance=ExtResource("4_fc0e3")]
+position = Vector2(1, 2)
+
 [node name="Horse man" parent="." instance=ExtResource("3_feb5d")]
 position = Vector2(67, 40)
-
-[node name="Flashlight" parent="." instance=ExtResource("4_fc0e3")]
-position = Vector2(48, -20)
-
-[node name="Flashlight2" parent="." instance=ExtResource("4_fc0e3")]
-position = Vector2(35, -25)

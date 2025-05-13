@@ -178,15 +178,15 @@ states/Run/position = Vector2(552, 100.5)
 states/Start/position = Vector2(200, 98.25)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_4wf4l"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_x1y6q"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_ap3xn"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_xr8lj"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_r8fok"), "Run", "Move", SubResource("AnimationNodeStateMachineTransition_nhbkt"), "Move", "Run", SubResource("AnimationNodeStateMachineTransition_vskfa")]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tekja"]
+radius = 2.0
+height = 8.0
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lu8i8"]
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tekja"]
 bg_color = Color(0, 0.552207, 0, 1)
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tekja"]
-radius = 2.0
-height = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lu8i8"]
 radius = 5.0
@@ -212,8 +212,18 @@ parameters/Idle/blend_position = Vector2(-0.000977516, 0.00272477)
 parameters/Move/blend_position = Vector2(-0.00195503, 0.00817442)
 parameters/Run/blend_position = Vector2(-0.0195503, 0.00272477)
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_tekja")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(10, 10)
+
+[node name="Light" parent="." instance=ExtResource("3_lu8i8")]
+scale = Vector2(0.12, 0.12)
+
+[node name="StaminaTimer" type="Timer" parent="."]
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -226,16 +236,6 @@ theme_override_styles/background = SubResource("StyleBoxFlat_lu8i8")
 theme_override_styles/fill = SubResource("StyleBoxFlat_tekja")
 show_percentage = false
 metadata/_edit_use_anchors_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 4)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_tekja")
-
-[node name="Light" parent="." instance=ExtResource("3_lu8i8")]
-scale = Vector2(0.15, 0.15)
-
-[node name="StaminaTimer" type="Timer" parent="."]
 
 [node name="ItemDetector" type="Area2D" parent="."]
 collision_layer = 0
