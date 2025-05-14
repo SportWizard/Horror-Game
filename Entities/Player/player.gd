@@ -10,6 +10,7 @@ extends CharacterBody2D
 @onready var _state_machine: AnimationNodeStateMachinePlayback = self._animation_tree["parameters/playback"]
 @onready var _stamina_timer: Timer = $StaminaTimer
 @onready var _progress_bar: ProgressBar = $UI/ProgressBar
+@onready var _player_inventory: TextureRect = $UI/PlayerInventory
 
 var _cur_dir: Vector2 = Vector2(1, 0) # -1 is left and 1 is right, y is 0
 
@@ -91,13 +92,13 @@ func _user_input() -> void:
 		if self._detected_item:
 			self._pickup_item()
 	
-	if Input.is_action_just_pressed("Drop item"):
+	if Input.is_action_pressed("Drop item"):
 		if self._item_slots[self._selected_item_slot-1]:
 			self._drop_item()
 	
-	if Input.is_action_just_pressed("Item slot1"):
+	if Input.is_action_pressed("Item slot1"):
 		self._selected_item_slot = 1
-	elif Input.is_action_just_pressed("Item slot2"):
+	elif Input.is_action_pressed("Item slot2"):
 		self._selected_item_slot = 2
 
 func _ready() -> void:

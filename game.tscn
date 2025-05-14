@@ -7,7 +7,7 @@
 
 [node name="Game" type="Node2D"]
 
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+[node name="Darkness" type="DirectionalLight2D" parent="."]
 blend_mode = 1
 
 [node name="Temporary background" type="Sprite2D" parent="."]

@@ -3,22 +3,14 @@
 [ext_resource type="Script" uid="uid://dm04hnaxxmxxm" path="res://Items/item_slot.gd" id="1_nf7jn"]
 [ext_resource type="Texture2D" uid="uid://chy780y4yjm40" path="res://Items/item-slot.png" id="1_vgjhl"]
 
-[node name="ItemSlot" type="Control"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 16.0
-offset_bottom = 16.0
+[node name="ItemSlot" type="Sprite2D"]
+texture = ExtResource("1_vgjhl")
+hframes = 2
 script = ExtResource("1_nf7jn")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_vgjhl")
-centered = false
-hframes = 2
-
 [node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 14.0
-offset_bottom = 14.0
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
 expand_mode = 1
