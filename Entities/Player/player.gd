@@ -10,7 +10,6 @@ extends CharacterBody2D
 @onready var _state_machine: AnimationNodeStateMachinePlayback = self._animation_tree["parameters/playback"]
 @onready var _stamina_timer: Timer = $StaminaTimer
 @onready var _progress_bar: ProgressBar = $UI/ProgressBar
-@onready var _player_inventory: TextureRect = $UI/PlayerInventory
 
 var _cur_dir: Vector2 = Vector2(1, 0) # -1 is left and 1 is right, y is 0
 
