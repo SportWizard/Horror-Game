@@ -1,13 +1,16 @@
 extends Item
 
-@onready var _collisionShape: CollisionShape2D = $CollisionShape2D
+@onready var _collision_shape: CollisionShape2D = $CollisionShape2D
+@onready var _point_light: PointLight2D = $PointLight2D
 
-var _cur_dir: Vector2 = Vector2(1, 0)
+# Override
+func use():
+	self._point_light.visible = false if self._point_light.visible else true 
 
 func _physics_process(delta: float) -> void:
 	if self.get_parent().name.substr(0, 6) == "Player":
-		self._collisionShape.disabled = true
+		self._collision_shape.disabled = true
 		
 		self.look_at(self.get_global_mouse_position())
 	else:
-		self._collisionShape.disabled = false
+		self._collision_shape.disabled = false
